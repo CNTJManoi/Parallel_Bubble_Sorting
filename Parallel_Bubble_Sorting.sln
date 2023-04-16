@@ -5,13 +5,15 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parallel_Bubble_Sorting", "Parallel_Bubble_Sorting\Parallel_Bubble_Sorting.csproj", "{A22726D9-3269-4B43-8DC9-94520FC40F17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bubble_Sorting_Tests", "Bubble_Sorting_Tests\Bubble_Sorting_Tests.csproj", "{BB8A40BF-159B-4F6E-9ADE-D627F09AA070}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bubble_Sorting_Tests", "Bubble_Sorting_Tests\Bubble_Sorting_Tests.csproj", "{BB8A40BF-159B-4F6E-9ADE-D627F09AA070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{32A15F20-195D-4A8F-9DCD-27DCDEF200C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{32A15F20-195D-4A8F-9DCD-27DCDEF200C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtils", "FileUtils\FileUtils.csproj", "{1241AB32-D086-4746-BB20-7A459706CB18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUtils", "FileUtils\FileUtils.csproj", "{1241AB32-D086-4746-BB20-7A459706CB18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{97989E78-1E01-448E-9611-1E3F80FB9AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterface", "UserInterface\UserInterface.csproj", "{97989E78-1E01-448E-9611-1E3F80FB9AFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParralelBubleSorting.WPF", "ParralelBubleSorting.WPF\ParralelBubleSorting.WPF.csproj", "{24CD677E-98A9-4759-955E-F5B3A75094BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{97989E78-1E01-448E-9611-1E3F80FB9AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97989E78-1E01-448E-9611-1E3F80FB9AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97989E78-1E01-448E-9611-1E3F80FB9AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CD677E-98A9-4759-955E-F5B3A75094BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CD677E-98A9-4759-955E-F5B3A75094BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CD677E-98A9-4759-955E-F5B3A75094BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CD677E-98A9-4759-955E-F5B3A75094BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
