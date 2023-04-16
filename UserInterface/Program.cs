@@ -1,4 +1,7 @@
-﻿namespace UserInterface;
+﻿using Parallel_Bubble_Sorting.Algorithm;
+using Repository;
+
+namespace UserInterface;
 
 internal class Program
 {

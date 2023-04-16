@@ -103,4 +103,20 @@ public class BubbleSort
         }
         return arr;
     }
+
+    public int[] ParallelSortWithMistake(int[] arr)
+    {
+        Parallel.For(1, arr.Length, i =>
+        {
+            for (var j = 0; j < arr.Length - i; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    (arr[j], arr[j+1]) = (arr[j+1], arr[j]);
+                }
+            }
+
+        });
+        return arr;
+    }
 }
