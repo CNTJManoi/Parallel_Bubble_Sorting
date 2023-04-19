@@ -61,7 +61,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
             else
             {
                 StartShowProgress();
-                var result = Sort.ParallelBubbleSortAsyncWithBlock(_massiveNotSort);
+                var result = Sort.ParallelBubbleSortAsync(_massiveNotSort);
                 _massiveSort = result.Result.SortedArray;
                 UpdateStringSort();
                 StopShowProgress();
@@ -70,7 +70,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
         private void GenerateInitialMassive(object obj)
         {
             MassiveGenerator generator = new MassiveGenerator();
-            var massive = generator.GenerateRandomArray(100000);
+            var massive = generator.GenerateRandomArray(50000);
             _massiveNotSort = massive;
             UpdateStringNotSort();
         }

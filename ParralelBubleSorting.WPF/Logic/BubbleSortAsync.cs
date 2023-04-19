@@ -15,23 +15,7 @@ namespace ParralelBubleSorting.WPF.Logic
         {
             Sort = new BubbleSort();
         }
-        public async Task<SortedArrayModel> ParallelBubbleSortAsync(int[] arr, int numThreads = 8)
-        {
-            SortedArrayModel result = null;
-            if (arr != null)
-            {
-                int length = arr.Length;
-                result = await Task.Run(() =>
-                {
-                    int[] tempArr = new int[length];
-                    Array.Copy(arr, tempArr, length);
-                    var res = Sort.ParallelBubbleSortStart(tempArr, numThreads);
-                    return res;
-                });
-            }
-            return result;
-        }
-        public Task<SortedArrayModel> ParallelBubbleSortAsyncWithBlock(int[] arr, int numThreads = 8)
+        public Task<SortedArrayModel> ParallelBubbleSortAsync(int[] arr, int numThreads = 8)
         {
             Task<SortedArrayModel> result = null;
             if (arr != null)
