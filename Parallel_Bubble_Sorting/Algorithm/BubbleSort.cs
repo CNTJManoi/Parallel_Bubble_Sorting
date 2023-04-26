@@ -9,11 +9,8 @@ public class BubbleSort
     {
         Checker = new MassiveChecker();
     }
-
-    private Task[] Tasks { get; set; }
     private Stopwatch Stopwatch { get; set; }
     private MassiveChecker Checker { get; set; }
-    private int[] nums;
 
     public SortedArrayModel NormalBubbleSortStart(int[] arr)
     {
@@ -46,22 +43,22 @@ public class BubbleSort
         return arr;
     }
 
-    public int[] ParallelBubbleSortStart(int[] array, int threadsCountBubble)
+    public int[] ParallelBubbleSortStart(int[] array, CancellationToken token)
     {
         if (array == null) throw new ArgumentNullException(nameof(array));
         if (array.Length == 0) throw new ArgumentException("Массив не может быть пустой.", nameof(array));
-        if (threadsCountBubble <= 0) throw new ArgumentOutOfRangeException(nameof(threadsCountBubble));
-        Tasks = new Task[threadsCountBubble];
         Stopwatch = Stopwatch.StartNew();
-        var resultMassive = ParallelBubbleSort(array, threadsCountBubble);
+        var resultMassive = ParallelBubbleSort(array, 8, token);
         Stopwatch.Stop();
         return resultMassive;
     }
 
-    private int[] ParallelBubbleSort(int[] arr, int numThreads)
+    private int[] ParallelBubbleSort(int[] arr, int numThreads, CancellationToken token)
     {
         for (int i = 0; !Checker.CheckArrayForSorting(arr); i++)
         {
+            if (token.IsCancellationRequested)
+                token.ThrowIfCancellationRequested();
             if (i % 2 == 0)
             {
                 Parallel.For(0, numThreads, j =>

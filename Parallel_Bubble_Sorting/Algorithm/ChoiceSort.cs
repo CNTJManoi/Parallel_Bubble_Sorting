@@ -6,35 +6,30 @@ using System.Threading.Tasks;
 
 namespace Parallel_Bubble_Sorting.Algorithm
 {
-    internal class ChoiceSort
+    public class ChoiceSort
     {
-        public int[] ParallelSelectionSortNoError(int[] arr)
+        public int[] SelectionSort(int[] arr, CancellationToken token)
         {
-            int indx;
-            object lockObject = new object();
+            int n = arr.Length;
             for (int i = 0; i < arr.Length; i++)
             {
-                indx = i;
-                Parallel.For(i, arr.Length, j =>
+                if (token.IsCancellationRequested)
+                    token.ThrowIfCancellationRequested();
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
                 {
-                    lock (lockObject)
+                    if (arr[j] < arr[minIndex])
                     {
-                        if (arr[j] < arr[indx])
-                        {
-
-                            indx = j;
-
-                        }
+                        minIndex = j;
                     }
-                });
-                if (arr[indx] != arr[i])
+                }
+                if (minIndex != i)
                 {
                     int temp = arr[i];
-                    arr[i] = arr[indx];
-                    arr[indx] = temp;
+                    arr[i] = arr[minIndex];
+                    arr[minIndex] = temp;
                 }
             }
-
             return arr;
         }
     }

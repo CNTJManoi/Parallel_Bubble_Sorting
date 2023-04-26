@@ -6,14 +6,14 @@
         xmlns:localModel="clr-namespace:ParralelBubleSorting.WPF.ViewModels"
         xmlns:local="clr-namespace:ParralelBubleSorting.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontSize="18">
+        Title="MainWindow" Height="655" Width="1110" FontSize="18">
     <Window.DataContext>
         <localModel:MainWindowModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="317*"/>
+            <RowDefinition Height="322*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Grid  Grid.Row="0"
                Grid.Column="0"
-               Margin="5">
+               Margin="5,5,5,5">
             <Border BorderThickness="1,1,1,1" 
                     BorderBrush="Black" 
                     CornerRadius="8,8,3,3"/>
@@ -41,7 +41,7 @@
         </Grid>
         <Grid Grid.Row="0"
               Grid.Column="1"
-              Margin="5">
+              Margin="5,5,5,5">
             <Border BorderThickness="1,1,1,1" 
                     BorderBrush="Black" 
                     CornerRadius="8,8,3,3"/>
@@ -60,32 +60,72 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1"
-                    Grid.ColumnSpan="2">
+                    Grid.ColumnSpan="2" Margin="0,19,0,0">
             <DockPanel Margin="5" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center">
-                <Button Margin="15,0,15,0"
-                        Content="Сгенерировать массив"
-                        Command="{Binding GenerateMassiveCommand}"/>
-                <Button Margin="15,0,15,0" 
-                        Content="Асинхронный запуск сортировки" 
+                       HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Margin="15,0,15,0" 
                         DockPanel.Dock="Left"
-                        Command="{Binding StartSortCommand}"/>
-                <Button Margin="15,0,15,0" 
-                        Content="Запуск с блокированием" 
-                        DockPanel.Dock="Right"
-                        Command="{Binding StartSortWithBlockCommand}"/>
+                        Command="{Binding StartSortWithOneResultCommand}" Width="256">
+                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до первого завершение задачи" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Margin="15,15,15,0" 
+                        DockPanel.Dock="Left"
+                        Command="{Binding  StartSortWithBlockOneResultCommand}" Width="256">
+                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до первого завершение задачи с блокировкой" TextWrapping="Wrap"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Margin="15,0,15,0" 
+                        DockPanel.Dock="Left"
+                        Command="{Binding StartSortWithAllResultCommand}" Width="256">
+                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до завершения всех задач" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Margin="15,15,15,0" 
+                        DockPanel.Dock="Left"
+                        Command="{Binding StartSortWithBlockAllResultCommand}" Width="256">
+                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до завершения всех задач с блокировкой" TextWrapping="Wrap"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Размер массива" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBox Text="{Binding InputCountMassive, Mode=TwoWay}" Margin="0,0,0,10" FontSize="20"/>
+                    <Button Margin="15,0,15,0" 
+                        DockPanel.Dock="Left"
+                        Command="{Binding GenerateMassiveCommand}" Width="256">
+                        <TextBlock Text="Сгенерировать" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button Margin="15,15,15,0" 
+                        DockPanel.Dock="Left"
+                        Command="{Binding ClearCommand}" Width="256">
+                        <TextBlock Text="Очистить" TextWrapping="Wrap"/>
+                    </Button>
+                </StackPanel>
             </DockPanel>
             <TextBlock Text="Индикатор работы" 
                        FontSize="14" 
                        HorizontalAlignment="Center" 
-                       Margin="0,5,0,5"/>
+                       Margin="0,0,0,5"/>
             <ProgressBar Height="20" 
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center" 
                          Width="600"
                          IsIndeterminate="{Binding IsWorking}"
                          />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Margin="10,0,10,0">
+                    <TextBlock Text="Статус первой задачи"/>
+                    <TextBlock Text="{Binding StatusOneTask}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,10,0">
+                    <TextBlock Text="Статус второй задачи"/>
+                    <TextBlock Text="{Binding StatusTwoTask}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,10,0">
+                    <TextBlock Text="Статус третьей задачи"/>
+                    <TextBlock Text="{Binding StatusThreeTask}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

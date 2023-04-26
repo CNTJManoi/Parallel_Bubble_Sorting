@@ -34,7 +34,7 @@ internal class Menu
         StartNormalSorting(array);
         //Параллельная сортировка
         Informant.PrintWaitingMessage();
-        StartParallelSorting(copyArray, numberThreads);
+        //StartParallelSorting(copyArray, numberThreads);
         Console.ReadKey();
     }
 
@@ -85,12 +85,12 @@ internal class Menu
         Informant.PrintResultAlgorithm(resultNormal, TypeSorting.Normal, statusNormal);
     }
 
-    private void StartParallelSorting(int[] array, int numberThreads)
-    {
-        Writer.WriteArrayInFile(array, "NotSortParallel.txt");
-        var resultParallel = Sort.ParallelBubbleSortStart(array, numberThreads);
-        Writer.WriteArrayInFile(array, "SortParallel.txt");
-        var statusParallel = Checker.CheckArrayForSorting(resultParallel.SortedArray);
-        Informant.PrintResultAlgorithm(resultParallel, TypeSorting.Parallel, statusParallel);
-    }
+    //private void StartParallelSorting(int[] array, int numberThreads)
+    //{
+    //    Writer.WriteArrayInFile(array, "NotSortParallel.txt");
+    //    var resultParallel = Sort.ParallelBubbleSortStart(array, numberThreads);
+    //    Writer.WriteArrayInFile(array, "SortParallel.txt");
+    //    var statusParallel = Checker.CheckArrayForSorting(resultParallel.SortedArray);
+    //    Informant.PrintResultAlgorithm(resultParallel, TypeSorting.Parallel, statusParallel);
+    //}
 }
