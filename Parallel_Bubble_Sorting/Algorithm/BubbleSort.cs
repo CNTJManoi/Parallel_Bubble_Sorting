@@ -46,7 +46,7 @@ public class BubbleSort
         return arr;
     }
 
-    public SortedArrayModel ParallelBubbleSortStart(int[] array, int threadsCountBubble)
+    public int[] ParallelBubbleSortStart(int[] array, int threadsCountBubble)
     {
         if (array == null) throw new ArgumentNullException(nameof(array));
         if (array.Length == 0) throw new ArgumentException("Массив не может быть пустой.", nameof(array));
@@ -55,7 +55,7 @@ public class BubbleSort
         Stopwatch = Stopwatch.StartNew();
         var resultMassive = ParallelBubbleSort(array, threadsCountBubble);
         Stopwatch.Stop();
-        return new SortedArrayModel(Stopwatch.Elapsed, resultMassive);
+        return resultMassive;
     }
 
     private int[] ParallelBubbleSort(int[] arr, int numThreads)

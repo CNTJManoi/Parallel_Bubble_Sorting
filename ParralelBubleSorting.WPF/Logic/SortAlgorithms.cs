@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ParralelBubleSorting.WPF.Logic
 {
-    class BubbleSortAsync
+    class SortAlgorithms
     {
         private BubbleSort Sort { get; set; }
-        public BubbleSortAsync()
+        public SortAlgorithms()
         {
             Sort = new BubbleSort();
         }

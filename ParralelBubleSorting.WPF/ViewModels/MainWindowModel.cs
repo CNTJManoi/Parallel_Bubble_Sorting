@@ -17,7 +17,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
         private DelegateCommand _startSort;
         private DelegateCommand _startSortBlocking;
         private DelegateCommand _startGenerateMassive;
-        private BubbleSortAsync Sort { get; set; }
+        private SortAlgorithms Sort { get; set; }
         public string NotSortMassive { get; set; }
         public string SortMassive { get; set; }
         public bool IsWorking { get; set; }
@@ -35,7 +35,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
             NotSortMassive = "";
             SortMassive = "";
             IsWorking = false;
-            Sort = new BubbleSortAsync();
+            Sort = new SortAlgorithms();
         }
         private async void StartSort(object obj)
         {
