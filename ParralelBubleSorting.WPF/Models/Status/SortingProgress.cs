@@ -33,28 +33,20 @@ namespace ParralelBubleSorting.WPF.Models.Status
             {
                 case TaskStatus.Created:
                     return "Создан";
-                    break;
                 case TaskStatus.WaitingForActivation:
                     return "Ждет реализации";
-                    break;
                 case TaskStatus.WaitingToRun:
                     return "Ждет запуска";
-                    break;
                 case TaskStatus.Running:
                     return "Запущен";
-                    break;
                 case TaskStatus.WaitingForChildrenToComplete:
                     return "Ждет выполнение других";
-                    break;
                 case TaskStatus.RanToCompletion:
                     return "Успешно выполнен";
-                    break;
                 case TaskStatus.Canceled:
                     return "Отменен";
-                    break;
                 case TaskStatus.Faulted:
                     return "Ошибка";
-                    break;
             }
             return "Ошибка";
         }

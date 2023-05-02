@@ -29,7 +29,7 @@ namespace ParralelBubleSorting.WPF.Logic
             InsertionSort = new InsertionSort();
             SortingProgress = ProgressTasks;
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Interval = TimeSpan.FromSeconds(0.2);
             _timer.Tick += OnTimerTick;
             _timer.Start();
         }
@@ -37,14 +37,18 @@ namespace ParralelBubleSorting.WPF.Logic
         {
             var copyArray = new int[array.Length];
             copyArray = array.Select(x => x).ToArray();
+            var copyArray1 = new int[array.Length];
+            copyArray1 = array.Select(x => x).ToArray();
+            var copyArray2 = new int[array.Length];
+            copyArray2 = array.Select(x => x).ToArray();
             Task<int[]> completedTask = null;
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             int[] sortedArray;
             
             task1 = Task.Run(() => BubbleSort.ParallelBubbleSortStart(copyArray, token), token);
-            task2 = Task.Run(() => ChoiceSort.SelectionSort(copyArray, token), token);
-            task3 = Task.Run(() => InsertionSort.InsertionSortParallel(copyArray, token), token);
+            task2 = Task.Run(() => ChoiceSort.SelectionSort(copyArray1, token), token);
+            task3 = Task.Run(() => InsertionSort.InsertSort(copyArray2, token), token);
             SortingProgress.UpdateStatus(task1, task2, task3);
 
             if(type == TypeSort.SortWithOneWait) completedTask = await Task.WhenAny(task1, task2, task3);
@@ -54,7 +58,6 @@ namespace ParralelBubleSorting.WPF.Logic
             {
                 cts.Cancel();
                 sortedArray = completedTask.Result;
-                Thread.Sleep(100);
             }
             else
             {
@@ -67,14 +70,18 @@ namespace ParralelBubleSorting.WPF.Logic
         {
             var copyArray = new int[array.Length];
             copyArray = array.Select(x => x).ToArray();
+            var copyArray1 = new int[array.Length];
+            copyArray1 = array.Select(x => x).ToArray();
+            var copyArray2 = new int[array.Length];
+            copyArray2 = array.Select(x => x).ToArray();
             int result = -1;
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             Task<int[]> sortedArray = null;
 
             task1 = Task.Run(() => BubbleSort.ParallelBubbleSortStart(copyArray, token), token);
-            task2 = Task.Run(() => ChoiceSort.SelectionSort(copyArray, token), token);
-            task3 = Task.Run(() => InsertionSort.InsertionSortParallel(copyArray, token), token);
+            task2 = Task.Run(() => ChoiceSort.SelectionSort(copyArray1, token), token);
+            task3 = Task.Run(() => InsertionSort.InsertSort(copyArray2, token), token);
             SortingProgress.UpdateStatus(task1, task2, task3);
 
             if (type == TypeSort.SortWithOneWait) result = Task.WaitAny(task1, task2, task3);
