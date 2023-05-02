@@ -67,24 +67,19 @@
                     <Button Margin="15,0,15,0" 
                         DockPanel.Dock="Left"
                         Command="{Binding StartSortWithOneResultCommand}" Width="256">
-                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до первого завершение задачи" TextWrapping="Wrap"/>
+                        <TextBlock Text="Запуск одной задачи с исключением" TextWrapping="Wrap"/>
                     </Button>
                     <Button Margin="15,15,15,0" 
                         DockPanel.Dock="Left"
                         Command="{Binding  StartSortWithBlockOneResultCommand}" Width="256">
-                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до первого завершение задачи с блокировкой" TextWrapping="Wrap"/>
+                        <TextBlock Text="Запуск трех задач с исключением" TextWrapping="Wrap"/>
                     </Button>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button Margin="15,0,15,0" 
                         DockPanel.Dock="Left"
                         Command="{Binding StartSortWithAllResultCommand}" Width="256">
-                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до завершения всех задач" TextWrapping="Wrap"/>
-                    </Button>
-                    <Button Margin="15,15,15,0" 
-                        DockPanel.Dock="Left"
-                        Command="{Binding StartSortWithBlockAllResultCommand}" Width="256">
-                        <TextBlock Text="Параллельный запуск 3 алгоритмов с работой до завершения всех задач с блокировкой" TextWrapping="Wrap"/>
+                        <TextBlock Text="Запуск трех задач с задачами продолжениями" TextWrapping="Wrap"/>
                     </Button>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

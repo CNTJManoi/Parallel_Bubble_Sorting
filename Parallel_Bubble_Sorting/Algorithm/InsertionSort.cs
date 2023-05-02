@@ -10,10 +10,10 @@ namespace Parallel_Bubble_Sorting.Algorithm
     {
         public int[] InsertSort(int[] array, CancellationToken token)
         {
+            if (array == null) throw new ErrorSortException("Произошла ошибка в алгоритме сортировки!");
             for (int i = 1; i < array.Length; i++)
             {
-                if (token.IsCancellationRequested)
-                    token.ThrowIfCancellationRequested();
+                token.ThrowIfCancellationRequested();
                 var key = array[i];
                 var flag = 0;
 

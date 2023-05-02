@@ -10,11 +10,11 @@ namespace Parallel_Bubble_Sorting.Algorithm
     {
         public int[] SelectionSort(int[] arr, CancellationToken token)
         {
+            if (arr == null) throw new ErrorSortException("Произошла ошибка в алгоритме сортировки!");
             int n = arr.Length;
             for (int i = 0; i < arr.Length; i++)
             {
-                if (token.IsCancellationRequested)
-                    token.ThrowIfCancellationRequested();
+                token.ThrowIfCancellationRequested();
                 int minIndex = i;
                 for (int j = i + 1; j < n; j++)
                 {

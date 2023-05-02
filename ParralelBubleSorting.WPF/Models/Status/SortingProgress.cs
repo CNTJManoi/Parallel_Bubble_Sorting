@@ -23,9 +23,9 @@ namespace ParralelBubleSorting.WPF.Models.Status
 
         public void UpdateStatus(Task taskOne, Task taskTwo, Task taskThree)
         {
-            StatusOneTask = GenerateStringStatus(taskOne);
-            StatusTwoTask = GenerateStringStatus(taskTwo);
-            StatusThreeTask = GenerateStringStatus(taskThree);
+            if(taskOne != null) StatusOneTask = GenerateStringStatus(taskOne);
+            if(taskTwo != null) StatusTwoTask = GenerateStringStatus(taskTwo);
+            if(taskThree != null) StatusThreeTask = GenerateStringStatus(taskThree);
         }
         private string GenerateStringStatus(Task task)
         {

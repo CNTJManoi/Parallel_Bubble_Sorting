@@ -23,7 +23,7 @@ public class BubbleSort
     }
 
     private int[] NormalBubbleSortCycle(int[] arr)
-    {   
+    {
         var swapped = true;
         var end = arr.Length;
         while (swapped)
@@ -45,8 +45,6 @@ public class BubbleSort
 
     public int[] ParallelBubbleSortStart(int[] array, CancellationToken token)
     {
-        if (array == null) throw new ArgumentNullException(nameof(array));
-        if (array.Length == 0) throw new ArgumentException("Массив не может быть пустой.", nameof(array));
         Stopwatch = Stopwatch.StartNew();
         var resultMassive = ParallelBubbleSort(array, 8, token);
         Stopwatch.Stop();
@@ -55,12 +53,14 @@ public class BubbleSort
 
     private int[] ParallelBubbleSort(int[] arr, int numThreads, CancellationToken token)
     {
+        if (arr == null) throw new ErrorSortException("Произошла ошибка в алгоритме сортировки!");
         for (int i = 0; !Checker.CheckArrayForSorting(arr); i++)
         {
-            if (token.IsCancellationRequested)
-                token.ThrowIfCancellationRequested();
+            token.ThrowIfCancellationRequested();
+            
             if (i % 2 == 0)
             {
+
                 Parallel.For(0, numThreads, j =>
                 {
                     int start = j * (arr.Length / numThreads);
@@ -109,7 +109,7 @@ public class BubbleSort
             {
                 if (arr[j] > arr[j + 1])
                 {
-                    (arr[j], arr[j+1]) = (arr[j+1], arr[j]);
+                    (arr[j], arr[j + 1]) = (arr[j + 1], arr[j]);
                 }
             }
 

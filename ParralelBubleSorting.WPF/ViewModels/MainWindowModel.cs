@@ -80,8 +80,6 @@ namespace ParralelBubleSorting.WPF.ViewModels
                                               (_startSortBlockingWithResultOne = new DelegateCommand(StartSortWithBlockingOneResult));
         public DelegateCommand StartSortWithAllResultCommand => _startSortWithResultAll ??
                                               (_startSortWithResultAll = new DelegateCommand(StartSortWithAllResult));
-        public DelegateCommand StartSortWithBlockAllResultCommand => _startSortBlockingWithResultAll ??
-                                              (_startSortBlockingWithResultAll = new DelegateCommand(StartSortWithBlockingAllResult));
         public DelegateCommand GenerateMassiveCommand => _startGenerateMassiveCommand ??
                                               (_startGenerateMassiveCommand = new DelegateCommand(GenerateInitialMassive));
         public DelegateCommand ClearCommand => _clearCommand ??
@@ -113,15 +111,15 @@ namespace ParralelBubleSorting.WPF.ViewModels
             else
             {
                 StartShowProgress();
-                var result = await Sort.RunSortingAlgorithms(_massiveNotSort, Models.TypeSort.SortWithOneWait);
-                _massiveSort = result;
+                var result = await Sort.RunOneSortAlgorithm(_massiveNotSort);
+                if(result.Length > 1 && result[0] != 0)_massiveSort = result;
                 UpdateStringSort();
                 StopShowProgress();
             }
         }
 
         //Также как прошлый, но с блокировкой интерфейса
-        private void StartSortWithBlockingOneResult(object obj)
+        private async void StartSortWithBlockingOneResult(object obj)
         {
             if (_massiveNotSort == null || _massiveNotSort.Length == 0)
             {
@@ -130,8 +128,8 @@ namespace ParralelBubleSorting.WPF.ViewModels
             else
             {
                 StartShowProgress();
-                var result = Sort.RunSortingAlgorithmsWithBlock(_massiveNotSort, Models.TypeSort.SortWithOneWait);
-                _massiveSort = result.Result;
+                var result = await Sort.RunAllSortAlgorithm(_massiveNotSort);
+                if (result.Length > 1 && result[0] != 0) _massiveSort = result;
                 UpdateStringSort();
                 StopShowProgress();
             }
@@ -147,7 +145,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
             else
             {
                 StartShowProgress();
-                var result = await Sort.RunSortingAlgorithms(_massiveNotSort, Models.TypeSort.SortWithAllWait);
+                var result = await Sort.RunAllSortWithContinue(_massiveNotSort);
                 _massiveSort = result;
                 UpdateStringSort();
                 StopShowProgress();
@@ -155,21 +153,21 @@ namespace ParralelBubleSorting.WPF.ViewModels
         }
 
         //Также как прошлый, но с блокировкой интерфейса
-        private void StartSortWithBlockingAllResult(object obj)
-        {
-            if (_massiveNotSort == null || _massiveNotSort.Length == 0)
-            {
-                PrintError("не сгенерирован массив!");
-            }
-            else
-            {
-                StartShowProgress();
-                var result = Sort.RunSortingAlgorithmsWithBlock(_massiveNotSort, Models.TypeSort.SortWithAllWait);
-                _massiveSort = result.Result;
-                UpdateStringSort();
-                StopShowProgress();
-            }
-        }
+        //private void StartSortWithBlockingAllResult(object obj)
+        //{
+        //    if (_massiveNotSort == null || _massiveNotSort.Length == 0)
+        //    {
+        //        PrintError("не сгенерирован массив!");
+        //    }
+        //    else
+        //    {
+        //        StartShowProgress();
+        //        var result = Sort.RunSortingAlgorithmsWithBlock(_massiveNotSort, Models.TypeSort.SortWithAllWait);
+        //        _massiveSort = result.Result;
+        //        UpdateStringSort();
+        //        StopShowProgress();
+        //    }
+        //}
 
         private void GenerateInitialMassive(object obj)
         {
@@ -209,7 +207,7 @@ namespace ParralelBubleSorting.WPF.ViewModels
         }
         private void UpdateStringSort()
         {
-            SortMassive = string.Join(", ", _massiveSort);
+            if(_massiveSort != null) SortMassive = string.Join(", ", _massiveSort);
             OnPropertyChanged(nameof(SortMassive));
         }
 
