@@ -93,24 +93,51 @@ namespace ParralelBubleSorting.WPF.Logic
             CancellationToken token = cts.Token;
             task1 = new Task<int[]>(() => BubbleSort.ParallelBubbleSortStart(null, token), token);
 
-            var task1ContinueSuccess = task1.ContinueWith(_ => { sortedMassive = task1.Result; cts.Cancel(); MessageBox.Show("Успешно! Задача 1"); }, TaskContinuationOptions.OnlyOnRanToCompletion);
-            var task1ContinueOnFault = task1.ContinueWith(_ => MessageBox.Show("Возникла ошибка!" + ((ErrorSortException)task1.Exception.InnerException).Message), 
+            var task1ContinueSuccess = task1.ContinueWith(_ =>
+            {
+                sortedMassive = task1.Result;
+                cts.Cancel();
+                MessageBox.Show("Успешно! Задача 1");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            var task1ContinueOnFault = task1.ContinueWith(_ =>
+                    MessageBox.Show("Возникла ошибка в задаче 1!" + ((ErrorSortException)task1.Exception.InnerException).Message),
                 TaskContinuationOptions.OnlyOnFaulted);
-            var task1ContinueCancel = task1.ContinueWith(_ => MessageBox.Show("Задача 1 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
+
+            var task1ContinueCancel = task1.ContinueWith(_ =>
+                MessageBox.Show("Задача 1 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
 
             task2 = new Task<int[]>(() => ChoiceSort.SelectionSort(array, token), token);
 
-            var task2ContinueSuccess = task2.ContinueWith(_ => { sortedMassive = task2.Result; cts.Cancel(); MessageBox.Show("Успешно! Задача 2"); }, TaskContinuationOptions.OnlyOnRanToCompletion);
-            var task2ContinueOnFault = task2.ContinueWith(_ => MessageBox.Show("Возникла ошибка!" + ((ErrorSortException)task2.Exception.InnerException).Message),
+            var task2ContinueSuccess = task2.ContinueWith(_ =>
+            {
+                sortedMassive = task2.Result;
+                cts.Cancel();
+                MessageBox.Show("Успешно! Задача 2");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            var task2ContinueOnFault = task2.ContinueWith(_ =>
+                    MessageBox.Show("Возникла ошибка в задаче 2!" + ((ErrorSortException)task2.Exception.InnerException).Message),
                 TaskContinuationOptions.OnlyOnFaulted);
-            var task2ContinueCancel = task2.ContinueWith(_ => MessageBox.Show("Задача 2 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
+
+            var task2ContinueCancel = task2.ContinueWith(_ =>
+                MessageBox.Show("Задача 2 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
 
             task3 = new Task<int[]>(() => InsertionSort.InsertSort(array, token), token);
 
-            var task3ContinueSuccess = task3.ContinueWith(_ => { sortedMassive = task3.Result; cts.Cancel(); MessageBox.Show("Успешно! Задача 3"); }, TaskContinuationOptions.OnlyOnRanToCompletion) ;
-            var task3ContinueOnFault = task3.ContinueWith(_ => MessageBox.Show("Возникла ошибка!" + ((ErrorSortException)task3.Exception.InnerException).Message),
+            var task3ContinueSuccess = task3.ContinueWith(_ =>
+            {
+                sortedMassive = task3.Result;
+                cts.Cancel();
+                MessageBox.Show("Успешно! Задача 3");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            var task3ContinueOnFault = task3.ContinueWith(_ =>
+                    MessageBox.Show("Возникла ошибка в задаче 3!" + ((ErrorSortException)task3.Exception.InnerException).Message),
                 TaskContinuationOptions.OnlyOnFaulted);
-            var task3ContinueCancel = task3.ContinueWith(_ => MessageBox.Show("Задача 3 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
+
+            var task3ContinueCancel = task3.ContinueWith(_ =>
+                MessageBox.Show("Задача 3 отменена!"), TaskContinuationOptions.OnlyOnCanceled);
 
             var allTasks = Task.WhenAll(task1, task2, task3);
             task1.Start();
@@ -123,7 +150,7 @@ namespace ParralelBubleSorting.WPF.Logic
             catch (ErrorSortException e)
             {
             }
-            
+
             if (task1.IsFaulted && task2.IsFaulted && task3.IsFaulted)
             {
                 return new int[1] { 0 };
@@ -132,7 +159,7 @@ namespace ParralelBubleSorting.WPF.Logic
         }
         private void OnTimerTick(object sender, EventArgs e)
         {
-            if(task1 != null || task2 != null || task3 != null)
+            if (task1 != null || task2 != null || task3 != null)
                 SortingProgress.UpdateStatus(task1, task2, task3);
         }
     }
